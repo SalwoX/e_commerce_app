@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:e_commerce_app/controllers/cart_controller.dart';
 import 'package:e_commerce_app/data/repository/popular_product_repo.dart';
 import 'package:e_commerce_app/models/products_model.dart';
 import 'package:e_commerce_app/utils/utils.dart';
@@ -14,8 +15,8 @@ class PopularProductController extends GetxController {
   PopularProductController({required this.popularProductRepo});
 
   List<dynamic> _popularProductList = [];
-
   List<dynamic> get popularProductList => _popularProductList;
+  late CartController _cart;
 
   bool _isLoaded = false;
 
@@ -69,10 +70,19 @@ class PopularProductController extends GetxController {
       return quantity;
     }
   }
-  void initProduct() {
+  void initProduct(CartController cart) {
     _inCartItems = 0;
     _quantity = 0;
+    _cart = cart;
     //if exist
     //get from storage _inCartItems = 3
+  }
+
+  void addItem(ProductModel product) {
+    if(_quantity>0) {
+      _cart.addItem(product, _quantity);
+    }else {
+      Get.snackbar("Stop!", "You should add item to the cart.", backgroundColor: AppColors.mainColor);
+    }
   }
 }

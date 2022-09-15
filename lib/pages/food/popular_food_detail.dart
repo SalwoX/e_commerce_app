@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/controllers/cart_controller.dart';
 import 'package:e_commerce_app/controllers/popular_product_controller.dart';
 import 'package:e_commerce_app/pages/home/home.dart';
 import 'package:e_commerce_app/utils/dimensions.dart';
@@ -9,21 +10,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 
-class PopularFoodDetail extends StatefulWidget {
+class PopularFoodDetail extends StatelessWidget {
   final int pageId;
 
   const PopularFoodDetail({Key? key, required this.pageId}) : super(key: key);
 
   @override
-  State<PopularFoodDetail> createState() => _PopularFoodDetailState();
-}
-
-class _PopularFoodDetailState extends State<PopularFoodDetail> {
-  @override
   Widget build(BuildContext context) {
     var product =
-        Get.find<PopularProductController>().popularProductList[widget.pageId];
-    Get.find<PopularProductController>().initProduct();
+        Get.find<PopularProductController>().popularProductList[pageId];
+    Get.find<PopularProductController>()
+        .initProduct(Get.find<CartController>());
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(
@@ -100,7 +97,7 @@ class _PopularFoodDetailState extends State<PopularFoodDetail> {
         ],
       ),
       bottomNavigationBar:
-          GetBuilder<PopularProductController>(builder: (popularProduct) {
+      GetBuilder<PopularProductController>(builder: (popularProduct) {
         return Container(
           height: Dimensions.bottomHeightBar,
           padding: EdgeInsets.only(
@@ -151,10 +148,6 @@ class _PopularFoodDetailState extends State<PopularFoodDetail> {
                 ),
               ),
               Container(
-                child: BigText(
-                    text:
-                        "\$${popularProduct.quantity * product.price!} | Add to cart",
-                    color: Colors.white),
                 padding: EdgeInsets.only(
                   top: Dimensions.height20,
                   bottom: Dimensions.height20,
@@ -164,6 +157,15 @@ class _PopularFoodDetailState extends State<PopularFoodDetail> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.radius20),
                   color: AppColors.mainColor,
+                ),
+                child: GestureDetector(
+                  onTap: () {
+                    popularProduct.addItem(product);
+                  },
+                  child: BigText(
+                      text:
+                          "\$${popularProduct.quantity * product.price!} | Add to cart",
+                      color: Colors.white),
                 ),
               ),
             ],
