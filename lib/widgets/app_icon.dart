@@ -1,4 +1,3 @@
-import 'package:e_commerce_app/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class AppIcon extends StatelessWidget {

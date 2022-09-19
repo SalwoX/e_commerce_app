@@ -6,7 +6,7 @@ class RouteHelper {
   static const String _popularFood = "/popular-food";
   static const String _recommendedFood = "/recommended-food";
 
-  static String getInitial() => '$_initial';
+  static String getInitial() => _initial;
 
   static String getRecommendedFood(int pageId) =>
       '$_recommendedFood?pageId=$pageId';

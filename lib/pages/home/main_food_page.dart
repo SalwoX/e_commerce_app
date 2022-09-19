@@ -1,7 +1,10 @@
+import 'package:e_commerce_app/controllers/cart_controller.dart';
 import 'package:e_commerce_app/pages/home/food_page_body.dart';
 import 'package:e_commerce_app/utils/utils.dart';
 import 'package:e_commerce_app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:e_commerce_app/helper/dependencies.dart' as dep;
 
 class MainFoodPage extends StatefulWidget {
   const MainFoodPage({Key? key}) : super(key: key);
@@ -60,7 +63,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
             ),
           ),
         ),
-        Expanded(
+        const Expanded(
           child: SingleChildScrollView(child: FoodPageBody()),
         ),
       ],
