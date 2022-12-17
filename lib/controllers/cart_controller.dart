@@ -24,7 +24,7 @@ class CartController extends GetxController {
           img: value.img,
           quantity: value.quantity! + quantity,
           isExist: true,
-          time: "25 Şubat 1989",
+          time: "25 Ağustos 1989",
         );
       });
     } else {
